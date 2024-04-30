@@ -265,6 +265,7 @@ mod service {
         }
     }
 
+    #[cfg(not(target_arch = "wasm32"))]
     impl tower_service::Service<Request> for ClientWithMiddleware {
         type Response = Response;
         type Error = crate::Error;
@@ -287,6 +288,7 @@ mod service {
         }
     }
 
+    #[cfg(not(target_arch = "wasm32"))]
     impl tower_service::Service<Request> for &'_ ClientWithMiddleware {
         type Response = Response;
         type Error = crate::Error;
