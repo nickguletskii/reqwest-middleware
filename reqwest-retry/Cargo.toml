@@ -23,7 +23,7 @@ tracing = "0.1.26"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 hyper = "1.0"
-tokio = { version = "1.6.0", features = ["time"] }
+tokio = { version = "1.6.0", features = ["time"], default-features = false }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 parking_lot = { version = "0.11.2", features = ["wasm-bindgen"] } # work around https://github.com/tomaka/wasm-timer/issues/14
@@ -32,6 +32,8 @@ getrandom = { version = "0.2.0", features = ["js"] }
 
 [dev-dependencies]
 paste = "1.0.0"
-tokio = { version = "1.0.0", features = ["full"] }
-wiremock = "0.6.0"
 futures = "0.3.0"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
+wiremock = "0.6.0"
+tokio = { version = "1.6.0", features = ["time", "rt-multi-thread"], default-features = false }
